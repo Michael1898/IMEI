@@ -1,0 +1,26 @@
+@(userForm: Form[User])
+
+@import helper._
+@import bootstrap._
+
+@main {
+    
+    <h1>Новый пользователь</h1>
+    
+    @form(routes.UserController.save()) {
+        
+        <fieldset>
+            @CSRF.formField
+            @text(userForm("email"), '_label -> "Email", '_help -> "")
+            @password(userForm("password"), '_label -> "Password", '_help -> "")
+            @text(userForm("name"), '_label -> "Имя Пользователя", '_help -> "")
+            <!--@text(userForm("admin"), '_label -> "Admin", '_help -> "")-->
+            @helper.checkbox(userForm("admin"), '_label -> "Admin", '_help -> "")
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Создать пользователя" class="btn btn-primary"> или
+            <a href="@routes.UserController.list()" class="btn btn-default">Отменить</a>
+        </div>
+    }
+}

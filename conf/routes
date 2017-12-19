@@ -1,0 +1,50 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Маршрут к главной странице сайта
+GET     /                           controllers.HomeController.index
+
+GET     /feature                    controllers.HomeController.list
+
+GET     /login                      controllers.AuthController.login()
+
+GET     /auth                       controllers.AuthController.auth()
+
+GET     /sighup                     controllers.AuthController.signup()
+
+GET     /register                   controllers.AuthController.register()
+
+GET     /user                       controllers.UserController.list
+
+GET     /logout                     controllers.AuthController.logout
+
+GET     /change                     controllers.AuthController.change
+
+GET     /changePass                 controllers.AuthController.changePass()
+
+# Создание
+GET     /feature/new                controllers.HomeController.create()
+POST    /feature                    controllers.HomeController.save()
+
+GET     /user/new                   controllers.UserController.create()
+POST    /user                       controllers.UserController.save()
+
+# Редактирование
+GET     /feature/:id                controllers.HomeController.edit(id:Long)
+POST    /feature/:id                controllers.HomeController.update(id:Long)
+
+GET     /user/:id                   controllers.UserController.edit(id:String)
+POST    /user/:id                   controllers.UserController.update(id:String)
+
+POST    /feature/:id/delete         controllers.HomeController.delete(id:Long)
+
+POST    /user/:id/delete            controllers.UserController.delete(id:String)
+
+#DELETE    /feature/:id               controllers.HomeController.delete(id:Long)
+
+#DELETE    /user/:id                  controllers.UserController.delete(id:String)
+
+# Отображает статические файлы из папки /public в /public URL
+GET     /public/*file               controllers.Assets.versioned(path="/public", file: Asset)
+

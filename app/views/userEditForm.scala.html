@@ -1,0 +1,32 @@
+@(id: String, userForm: Form[User])
+
+@import helper._
+@import bootstrap._
+
+@main {
+
+    <h1>Пользователь</h1>
+
+    @form(routes.UserController.update(id)) {
+
+        <fieldset>
+            @CSRF.formField
+            @text(userForm("email"), '_label -> "Email", '_help -> "")
+            @text(userForm("name"), '_label -> "Имя Пользователя", '_help -> "")
+            <!--@text(userForm("admin"), '_label -> "Admin", '_help -> "")-->
+            @helper.checkbox(userForm("admin"), '_label -> "Admin", '_help -> "")
+            <input type="hidden" name="@userForm("id").getName" value="@userForm("id").getValue">
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" value="Сохранить" class="btn primary">
+            <a href="@routes.UserController.list()" class="btn btn-default">Отменить</a>
+        </div>
+    }
+    <div class="actions mt-3">
+        @form(routes.UserController.delete(id), 'class -> "topRight") {
+            @CSRF.formField
+            <input type="submit" value="Удалить" class="btn btn-danger">
+        }
+    </div>
+}

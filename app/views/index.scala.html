@@ -1,0 +1,325 @@
+@(message: String)(all: List[Feature])(user: User)
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ИМЭИ</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/public/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="/public/css/stylish-portfolio.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+          <i class="fa fa-times"></i>
+        </a>
+        @if(user!=null){
+          <li class="sidebar-brand">
+              <a class="js-scroll-trigger">@user.getName()</a>
+          </li>
+        } else {
+          <li class="sidebar-brand">
+              <a class="js-scroll-trigger">Гость</a>
+          </li>
+        }
+        <li>
+          <a class="js-scroll-trigger" href="#top">ИМЭИ</a>
+        </li>
+        <li>
+          <a class="js-scroll-trigger" href="#services">Направления</a>
+        </li>
+        <li>
+          <a class="js-scroll-trigger" href="#portfolio">Галерея</a>
+        </li>
+        <li>
+          <a class="js-scroll-trigger" href="#contact" onclick=$( "#menu-close").click();>Контакты</a>
+        </li>
+        @if(user!=null){
+          @if(user.getAdmin()){
+            <li>
+              <a href="@routes.UserController.list" id="mybutton" class="btn btn-warning">Для Админа!</a>
+            </li>
+          }
+          <li>
+            <a href="@routes.HomeController.list" id="mybutton" class="btn btn-info">Участие в сайте</a>
+          </li>
+          <li>
+              <a href="@routes.AuthController.change" id="mybutton" class="btn btn-primary">Сменить пароль</a>
+            </li>
+          <li>
+            <a href="@routes.AuthController.logout()" id="mybutton" class="btn btn-danger">Выйти</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="header" id="top">
+      <div class="text-vertical-center">
+        <h1>ИМЭИ</h1>
+        <h2>Институт математики экономики и информатики</h2>
+        <br>
+        <a href="#services" class="btn btn-dark btn-lg js-scroll-trigger">Узнать больше</a>
+      </div>
+    </header>
+
+
+    <!-- Services -->
+    <section id="services" class="services bg-primary text-white">
+      <div class="container" id="lessmargin">
+        <div class="row text-center">
+          <div class="col-lg-12 mx-auto">
+            <h2>Наши направления</h2>
+            <hr class="small">
+          </div>
+        </div>
+        <!-- Строка иконочек --> 
+        <div class="row text-center">
+                    @for(feature <- all.asScala){
+                      <div class="col-lg-2 col-md-4 col-sm-6"> 
+                          <!--<div class="col-lg-x col-md-a col-sm-b">-->
+                          <div class="service-item">
+                              <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-@feature.imageUrl fa-stack-1x text-primary"></i>
+                              </span>
+                              <h4>
+                                <div class="height_strong">
+                                  <strong>@feature.title</strong>
+                                </div>
+                              </h4>
+                              <a href="http://math.isu.ru/ru/entrant/professions.html#ismath" class="btn btn-light">Читать больше</a>
+                          </div>
+                      </div>
+                    }
+            <!-- <div class="col-lg-2 col-md-4 col-sm-6">
+              <div class="service-item">
+                  <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-info fa-stack-1x text-primary"></i>
+                  </span>
+                  <h4>
+                    <div class="height_strong">
+                      <strong>Прикладная информатика</strong>
+                    </div>
+                  </h4>
+                  <a href="http://math.isu.ru/ru/entrant/professions.html#ismath" class="btn btn-light">Читать больше</a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service-item">
+                  <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-desktop fa-stack-1x text-primary"></i>
+                  </span>
+                  <h4>
+                    <div class="height_strong">
+                      <strong>Фундаментальная информатика</strong>
+                    </div>
+                  </h4>
+                  <a href="http://math.isu.ru/ru/entrant/professions.html#iksmath" class="btn btn-light">Читать больше</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service-item">
+                  <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-sitemap fa-stack-1x text-primary"></i>
+                  </span>
+                  <h4>
+                    <div class="height_strong">
+                      <strong>Математическое обеспечение</strong>
+                    </div>
+                  </h4>
+                  <a href="http://math.isu.ru/ru/entrant/professions.html#amath" class="btn btn-light">Читать больше</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service-item">
+                  <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-shield fa-stack-1x text-primary"></i>
+                  </span>
+                  <h4>
+                    <div class="height_strong">
+                      <strong>Информационная безопасность</strong>
+                    </div>
+                  </h4>
+                  <a href="http://math.isu.ru/ru/entrant/professions.html#ib" class="btn btn-light">Читать больше</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service-item">
+                  <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-book fa-stack-1x text-primary"></i>
+                  </span>
+                  <h4>
+                    <div class="height_strong">
+                      <strong>Математика</strong>
+                    </div>
+                  </h4>
+                  <a href="http://math.isu.ru/ru/entrant/professions.html#math" class="btn btn-light">Читать больше</a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service-item">
+                  <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-maxcdn fa-stack-1x text-primary"></i>
+                  </span>
+                  <h4>
+                    <div class="height_strong">
+                      <strong>Прикладная математика и информатика</strong>
+                    </div>
+                  </h4>
+                  <a href="http://math.isu.ru/ru/entrant/professions.html#pmath" class="btn btn-light">Читать больше</a>
+                </div>
+            </div> -->
+        </div>
+      </div>
+      <!-- /.container -->
+    </section>
+
+    
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 mx-auto text-center">
+            <h2>Галерея</h2>
+            <hr class="small">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="portfolio-item">
+                  <img class="img-portfolio img-fluid" src="/public/img/1.jpg">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="portfolio-item">
+                  <img class="img-portfolio img-fluid" src="/public/img/2.jpg">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="portfolio-item">
+                  <img class="img-portfolio img-fluid" src="/public/img/3.jpg">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="portfolio-item">
+                  <img class="img-portfolio img-fluid" src="/public/img/4.jpg">
+                </div>
+              </div>
+            </div>
+            <!-- /.row (nested) -->
+            <a href="https://vk.com/albums-12998578" class="btn btn-dark">Показать больше</a>
+          </div>
+          <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+
+    <!-- Call to Action -->
+    @if(user==null){
+    <aside class="call-to-action bg-primary text-white">
+      <div class="container text-center">
+        <h2>Хочешь помогать разрабатывать сайт?</h2>
+        <a href="@routes.AuthController.login" class="btn btn-lg btn-light">Хочу!</a>
+        <!--<a href="#" class="btn btn-lg btn-dark">Look at Me!</a>-->
+      </div>
+    </aside>
+    }
+
+    <!-- Map -->
+    <!--<section id="contact" class="map">
+     <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.8374294600185!2d104.28012090097226!3d52.27518354550682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd4de53946f034e37!2z0JjRgNC60YPRgtGB0LrQuNC5INCz0L7RgdGD0LTQsNGA0YHRgtCy0LXQvdC90YvQuSDRg9C90LjQstC10YDRgdC40YLQtdGCLCDQmNC90YHRgtC40YLRg9GCINC80LDRgtC10LzQsNGC0LjQutC4LCDRjdC60L7QvdC-0LzQuNC60Lgg0Lgg0LjQvdGE0L7RgNC80LDRgtC40LrQuA!5e0!3m2!1sru!2sru!4v1506065197200"></iframe>
+      <br/>
+      <small>
+        <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.8374294600185!2d104.28012090097226!3d52.27518354550682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd4de53946f034e37!2z0JjRgNC60YPRgtGB0LrQuNC5INCz0L7RgdGD0LTQsNGA0YHRgtCy0LXQvdC90YvQuSDRg9C90LjQstC10YDRgdC40YLQtdGCLCDQmNC90YHRgtC40YLRg9GCINC80LDRgtC10LzQsNGC0LjQutC4LCDRjdC60L7QvdC-0LzQuNC60Lgg0Lgg0LjQvdGE0L7RgNC80LDRgtC40LrQuA!5e0!3m2!1sru!2sru!4v1506065197200"></a>
+      </small>
+    </section>-->
+
+    <!-- Footer -->
+    <footer>
+      <div id="contact" class="container">
+        <div class="row">
+          <div class="col-lg-10 mx-auto text-center">
+            <h4>
+              <strong>Институт математики экономики и информатики</strong>
+            </h4>
+            <p>бул. Гагарина, 20, Иркутск
+              <br>Иркутская обл., 664003</p>
+            <ul class="list-unstyled">
+              <li>
+                <i class="fa fa-phone fa-fw"></i>
+                (8-3952) 24-22-14</li>
+              <li>
+                <i class="fa fa-envelope-o fa-fw"></i>
+                <a href="mailto:name@@example.com">imei@@math.isu.ru</a>
+              </li>
+            </ul>
+            <br>
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="https://vk.com/profimei">
+                  <i class="fa fa-vk fa-fw fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://twitter.com/isupress">
+                  <i class="fa fa-twitter fa-fw fa-3x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.instagram.com/imeiprof_isu/">
+                  <i class="fa fa-instagram fa-fw fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+            <hr class="small">
+            <p class="text-muted">ИМЭИ &copy; Латышев Михаил Владимирович 2017</p>
+          </div>
+        </div>
+      </div>
+      <a id="to-top" href="#top" class="btn btn-dark btn-lg js-scroll-trigger">
+        <i class="fa fa-chevron-up fa-fw fa-1x"></i>
+      </a>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/public/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/vendor/popper/popper.min.js"></script>
+    <script src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="/public/js/stylish-portfolio.js"></script>
+
+  </body>
+
+</html>

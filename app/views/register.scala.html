@@ -1,0 +1,50 @@
+@(regForm: Form[Register])
+
+@import helper._
+@import bootstrap._
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/login.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+        <h2 class="form-signin-heading">Please sigh up</h2>
+
+      <!--<form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sigh up</button>
+      </form>-->
+      @form(routes.AuthController.register()) {
+            
+        @text(regForm("email"), '_label -> "Email", '_help -> "")
+        @password(regForm("password"), '_label -> "Password", '_help -> "")
+        @text(regForm("name"), '_label -> "Username", '_help -> "")
+    
+        <div class="actions">
+            <button class="btn btn-lg btn-success btn-block" type="submit">Sigh up</button>
+        </div>
+    }
+
+    </div> <!-- /container -->
+  </body>
+</html>
